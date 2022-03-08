@@ -1,4 +1,4 @@
-package gui;
+package vista.gui;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -16,6 +16,11 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import controlador.Coordinador;
+import modelo.dao.PersonaDao;
+import modelo.vo.PersonaVo;
+
 import javax.swing.JSeparator;
 
 public class RegistrarPersonasGui extends JDialog implements ActionListener{
@@ -35,7 +40,7 @@ public class RegistrarPersonasGui extends JDialog implements ActionListener{
 	private JButton btnAgregarMascotas;
 	private JButton btnCancelar;
 	private JButton btnRegistrar;
-
+	private Coordinador miCordinador;
 
 	/**
 	 * Create the dialog.
@@ -198,9 +203,20 @@ public class RegistrarPersonasGui extends JDialog implements ActionListener{
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if (e.getSource()==btnAgregarMascotas) {
-			RegistrarMascotasGui ventanaGestionMascotas=new RegistrarMascotasGui(null, true,txtDocumento.getText());
-			ventanaGestionMascotas.setVisible(true);
+		if (e.getSource()==btnRegistrar) {
+			PersonaVo miPersona=new PersonaVo();
+			miPersona.setNombre(txtNombre.getText());
+			miPersona.setTelefono(getName());
+			miPersona.setTipo(ABORT);
+			miPersona.setProfesion(getName());
+			
+			miCordinador.registrarPersona(miPersona);
+			
 		}
+	}
+
+
+	public void setMiCordinador(Coordinador miCordinador) {
+		this.miCordinador = miCordinador;
 	}
 }

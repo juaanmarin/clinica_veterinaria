@@ -1,4 +1,4 @@
-package gui;
+package vista.gui;
 
 import java.awt.BorderLayout;
 import java.awt.FlowLayout;
@@ -16,6 +16,9 @@ import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.JTextField;
 import javax.swing.border.TitledBorder;
+
+import controlador.Coordinador;
+
 import javax.swing.JSeparator;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
@@ -28,14 +31,8 @@ public class RegistrarMascotasGui extends JDialog implements ActionListener{
 	private JTextField txtTelefono;
 	private JButton btnCancelar;
 	private JButton btnRegistrar;
+	private Coordinador miCordinador;
 
-
-	/**
-	 * Create the dialog.
-	 * @param b 
-	 * @param ventanaPrincipal 
-	 * @param documento 
-	 */
 	public RegistrarMascotasGui(VentanaPrincipal ventanaPrincipal, boolean modal, String documento) {
 		super(ventanaPrincipal,modal);
 		setSize( 408, 288);
@@ -131,5 +128,10 @@ public class RegistrarMascotasGui extends JDialog implements ActionListener{
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
 		
+	}
+
+
+	public void setMiCordinador(Coordinador miCordinador) {
+		this.miCordinador = miCordinador;
 	}
 }

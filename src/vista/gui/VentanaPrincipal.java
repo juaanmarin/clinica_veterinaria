@@ -1,4 +1,4 @@
-package gui;
+package vista.gui;
 
 import java.awt.BorderLayout;
 import java.awt.EventQueue;
@@ -6,6 +6,9 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controlador.Coordinador;
+
 import javax.swing.JLabel;
 import javax.swing.SwingConstants;
 import java.awt.Font;
@@ -37,7 +40,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
 	private JMenuItem itemActualizarProductos;
 	private JMenuItem itemConsultaProductos;
 	private JMenuItem itemRegistroProductos;
-
+	private Coordinador miCordinador;
 	/**
 	 * Create the frame.
 	 */
@@ -137,16 +140,19 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==itemRegistrarPersonas) {
-			RegistrarPersonasGui RegistrarPersonas=new RegistrarPersonasGui(this,true);
-			RegistrarPersonas.setVisible(true);
+			miCordinador.mostrarVentanaRegistroPersonas();
 		}
 		if (e.getSource()==itemRegistrarMascotas) {
-			RegistrarMascotasGui RegistrarMascotas=new RegistrarMascotasGui(this, true,"");
-			RegistrarMascotas.setVisible(true);
+			miCordinador.mostrarVentanaRegistroMacotas();
 		}
 		if (e.getSource()==itemRegistroProductos) {
 			RegistrarProductosGui RegistrarProductos=new RegistrarProductosGui(this, true);
 			RegistrarProductos.setVisible(true);
 		}
+	}
+
+	
+	public void setMiCordinador(Coordinador miCordinador) {
+		this.miCordinador = miCordinador;
 	}
 }
