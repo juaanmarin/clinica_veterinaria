@@ -149,6 +149,9 @@ public class VentanaPrincipal extends JFrame implements ActionListener{
 			RegistrarProductosGui RegistrarProductos=new RegistrarProductosGui(this, true);
 			RegistrarProductos.setVisible(true);
 		}
+		if (e.getSource()==itemConsultarPersonas) {
+			miCordinador.mostrarVentanaConsultaPersonas();
+		}
 	}
 
 	

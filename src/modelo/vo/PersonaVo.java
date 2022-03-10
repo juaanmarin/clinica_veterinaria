@@ -10,7 +10,7 @@ public class PersonaVo {
 	private String profesion;
 	private int tipo;
 
-	private Nacimiento nacimiento;
+	private NacimientoVo nacimiento;
 	private List<MascotaVo> listaMascotas;
 	
 	public PersonaVo() {
@@ -18,7 +18,7 @@ public class PersonaVo {
 	}
 	
 	public PersonaVo(Long idPersona, String nombre, String telefono, 
-			String profesion, int tipo, Nacimiento nacimiento) {
+			String profesion, int tipo, NacimientoVo nacimiento) {
 		super();
 		this.idPersona = idPersona;
 		this.nombre = nombre;
@@ -69,12 +69,12 @@ public class PersonaVo {
 		this.profesion = profesion;
 	}
 
-	public Nacimiento getNacimiento() {
+	public NacimientoVo getNacimiento() {
 		return nacimiento;
 	}
 
 
-	public void setNacimiento(Nacimiento nacimiento) {
+	public void setNacimiento(NacimientoVo nacimiento) {
 		this.nacimiento = nacimiento;
 	}
 

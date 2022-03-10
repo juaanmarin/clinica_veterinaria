@@ -5,7 +5,9 @@ import modelo.dao.NacimientoDao;
 import modelo.dao.PersonaDao;
 import modelo.dao.PersonaProductoDao;
 import modelo.dao.ProductoDao;
+import modelo.vo.NacimientoVo;
 import modelo.vo.PersonaVo;
+import vista.gui.ConsultarPersonaGui;
 import vista.gui.RegistrarMascotasGui;
 import vista.gui.RegistrarPersonasGui;
 import vista.gui.RegistrarProductosGui;
@@ -57,18 +59,31 @@ public class Coordinador {
 	public void setPersonaProductoDao(PersonaProductoDao miPersonaProductoDao) {
 		this.miPersonaProductoDao=miPersonaProductoDao;
 	}
-
+	
+	public String registrarPersona(PersonaVo miPersona) {
+		return miPersonaDao.registrarPersona(miPersona);		
+	}
+	
 	public void mostrarVentanaRegistroPersonas() {
 		miRegistrarPersonasGui.setVisible(true);
 	}
-
 	public void mostrarVentanaRegistroMacotas() {
 		miRegistrarMascotasGui.setVisible(true);		
 	}
+	public Long registrarNacimiento(PersonaVo miPersona) {
+		return miNacimientoDao.registrarNacimiento(miPersona.getNacimiento());
+	}
 
-	public void registrarPersona(PersonaVo miPersona) {
-		miPersonaDao.registrarPersona(miPersona);
+	public void mostrarVentanaConsultaPersonas() {
 		
+	}
+	
+	public NacimientoVo consultarNacimiento(Long idNacimiento) {
+		return NacimientoDao.consultarNacimiento(idNacimiento);
+	}
+
+	public PersonaVo setConsultarPersona(Long idDocumento) {
+		return miPersonaDao.consultarPersona(idDocumento);
 	}
 
 

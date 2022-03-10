@@ -5,6 +5,7 @@ import modelo.dao.NacimientoDao;
 import modelo.dao.PersonaDao;
 import modelo.dao.PersonaProductoDao;
 import modelo.dao.ProductoDao;
+import vista.gui.ConsultarPersonaGui;
 import vista.gui.RegistrarMascotasGui;
 import vista.gui.RegistrarPersonasGui;
 import vista.gui.RegistrarProductosGui;
@@ -23,6 +24,8 @@ public class Relaciones {
 		MascotaDao miMascotaDao;
 		ProductoDao miProductoDao;
 		PersonaProductoDao miPersonaProductoDao;
+		ConsultarPersonaGui miConsultaPersonaGui;
+		
 		
 		//Se instancian por unica ocasión las clases declaradas
 		miVentanaPrincipal= new VentanaPrincipal();
@@ -35,6 +38,7 @@ public class Relaciones {
 		miNacimientoDao= new NacimientoDao();
 		miProductoDao= new ProductoDao();
 		miPersonaProductoDao= new PersonaProductoDao();
+		miConsultaPersonaGui=new ConsultarPersonaGui();
 		
 		//Se establece la relación entre el coordinador y cada instancia unica
 		//Al coordinador se le asigna el control de cada clase unica

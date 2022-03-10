@@ -2,18 +2,18 @@ package modelo.vo;
 
 import java.time.LocalDate;
 
-public class Nacimiento {
+public class NacimientoVo {
 	private Long idNacimiento;
 	private LocalDate fechaNacimiento;
 	private String ciudadNacimiento;
 	private String departamentoNacimiento;
 	private String paisNacimiento;
 	
-	public Nacimiento() {
+	public NacimientoVo() {
 		
 	}
 
-	public Nacimiento(Long idNacimiento, LocalDate fechaNacimiento,
+	public NacimientoVo(Long idNacimiento, LocalDate fechaNacimiento,
 			String ciudadNacimiento,String departamentoNacimiento,
 			String paisNacimiento) {
 		super();

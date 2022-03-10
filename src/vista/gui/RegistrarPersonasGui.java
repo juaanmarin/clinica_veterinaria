@@ -8,9 +8,12 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDate;
 
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
@@ -19,6 +22,7 @@ import javax.swing.border.TitledBorder;
 
 import controlador.Coordinador;
 import modelo.dao.PersonaDao;
+import modelo.vo.NacimientoVo;
 import modelo.vo.PersonaVo;
 
 import javax.swing.JSeparator;
@@ -40,7 +44,7 @@ public class RegistrarPersonasGui extends JDialog implements ActionListener{
 	private JButton btnAgregarMascotas;
 	private JButton btnCancelar;
 	private JButton btnRegistrar;
-	private Coordinador miCordinador;
+	private Coordinador miCoordinador;
 
 	/**
 	 * Create the dialog.
@@ -204,19 +208,51 @@ public class RegistrarPersonasGui extends JDialog implements ActionListener{
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource()==btnRegistrar) {
-			PersonaVo miPersona=new PersonaVo();
-			miPersona.setNombre(txtNombre.getText());
-			miPersona.setTelefono(getName());
-			miPersona.setTipo(ABORT);
-			miPersona.setProfesion(getName());
 			
-			miCordinador.registrarPersona(miPersona);
+			//Capturamos los datos de la persona
+			PersonaVo miPersona=new PersonaVo();
+			miPersona.setIdPersona(Long.parseLong(txtDocumento.getText()));
+			miPersona.setNombre(txtNombre.getText());
+			miPersona.setProfesion(txtProfesion.getText());
+			miPersona.setTelefono(txtTelefono.getText());
+			miPersona.setTipo(Integer.parseInt(txtTipo.getText()));
+
+			//Capturamos los datos de Nacimiento
+			NacimientoVo miNacimiento=new NacimientoVo();
+			miNacimiento.setCiudadNacimiento(txtCiudad.getText());
+			miNacimiento.setDepartamentoNacimiento(txtDepartamento.getText());
+			miNacimiento.setPaisNacimiento(txtPais.getText());
+			miNacimiento.setFechaNacimiento(LocalDate.of(Integer.parseInt(txtAnio.getText()), 
+			Integer.parseInt(txtMes.getText()), Integer.parseInt(txtDia.getText())));
+						
+			//Asignamos el objeto de Nacimiento a la persona
+			miPersona.setNacimiento(miNacimiento);
+					
+			/* Primero realizamos la inserción de Nacimiento ya que la tabla
+			* persona tiene la llave foranea donde se agrega el id del nacimiento, por
+			* eso para poder agregar dicho id el nacimiento tiene que existir
+			*/
+			Long idNacimiento=miCoordinador.registrarNacimiento(miPersona);
+			if (idNacimiento!=null) {
+				//se asigna el id del nacimiento al objeto de nacimiento de la persona
+				miPersona.getNacimiento().setIdNacimiento(idNacimiento);
+				//despues de verificar que se registró el nacimiento, procedemos a registrar la persona
+				String res=miCoordinador.registrarPersona(miPersona);
+				if (res.equals("ok")) {
+					JOptionPane.showMessageDialog(null, "Registro Exitoso!");
+				}else {
+					JOptionPane.showMessageDialog(null,res,"ERROR",JOptionPane.ERROR_MESSAGE );
+					}
+				}else {
+					JOptionPane.showMessageDialog(null,"No se puedo registrar el Nacimiento","ERROR",JOptionPane.ERROR_MESSAGE );
+			}
+			
 			
 		}
 	}
 
 
 	public void setMiCordinador(Coordinador miCordinador) {
-		this.miCordinador = miCordinador;
+		this.miCoordinador = miCordinador;
 	}
 }
